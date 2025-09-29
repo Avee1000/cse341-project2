@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100dvh;
+}
+
+input {
+    display: block;
+    margin: 1rem;
+}
+
+label {
+  margin: 1rem;
+}
+
+.navigation {
+  background-color: #333;
+  overflow: hidden;
+  width: 100%;
+  }
+
+.navigation ul {
+  margin: 16px;
+}
+
+.navigation a {
+ text-decoration: none;
+ color: white;
+}
+
+#wrapper .position-absolute {
+  top: 0;
+  right: 0;
+  width: 100%;
+}

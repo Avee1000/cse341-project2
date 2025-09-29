@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Sports Car",
+    "description": "Fast performance-oriented cars"
+  },
+  {
+    "name": "SUV",
+    "description": "Sport Utility Vehicles with off-road capability"
+  },
+  {
+    "name": "Truck",
+    "description": "Powerful vehicles for heavy-duty work and hauling"
+  },
+  {
+    "name": "Luxury",
+    "description": "Premium and executive cars with advanced comfort"
+  },
+  {
+    "name": "Classic",
+    "description": "Vintage and collectible vehicles"
+  }
+]

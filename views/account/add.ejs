@@ -1,0 +1,76 @@
+  <% if (errors) { %>
+  <div id="messages">
+    <ul class="error">
+      <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+
+
+  <div class="register-container">
+    <h1 class="text-center">Add User</h1>
+  </div>
+
+
+
+  <div class="container-lg d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+      <% if (errors) { %>
+      <ul class="notice">
+        <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+
+
+      <div class="inventory-container container-lg d-flex flex-column justify-content-center align-items-center"">
+
+
+        <form action="users/api/cars/create" method="post" id="updateForm"  class=" d-flex justify-content-center align-items-center flex-column">
+          <label for="make">Inventory Make</label>
+          <input type="text" id="make" name="make" required pattern="^[A-Za-z0-9]+$"
+            title="No spaces or special characters"">
+
+          <label for="model">Inventory Model</label>
+          <input type="text" id="model" name="model" required pattern="^[A-Za-z0-9]+$"
+            title="No spaces or special characters">
+
+          <label for="year">Inventory Year</label>
+          <input type="number" id="year" name="year" required min="1800" max="2100">
+
+          <label for="price">Inventory Price</label>
+          <input type="number" id="price" name="price" required>
+
+          <label for="miles">Inventory Miles</label>
+          <input type="number" id="miles" name="miles" required>
+
+          <label for="color">Inventory Color</label>
+          <input type="text" id="color" name="color" required>
+
+          <label for="description">Inventory Description</label>
+          <textarea id="description" name="description" required rows="4" pattern="^[A-Za-z0-9\s,.'-]+$"
+            title="No special characters except , . ' -"></textarea>
+
+          <label for="image">Inventory Image Path</label>
+          <input type="text" id="image" name="image" required pattern="^[A-Za-z0-9/._-]+$"
+            title="No spaces or special characters except / . _ -"  value="/images/no-image.png" disabled>
+
+          <label for="thumbnail">Inventory Image Thumbnail</label>
+          <input type="text" id="thumbnail" name="thumbnail" required pattern="^[A-Za-z0-9/._-]+$"
+            title="No spaces or special characters except / . _ -" value="/images/no-image-tn.png" disabled>
+
+          <label for="classification">Inventory Classification</label>
+          <select name="classification" id="classification" required>
+            <option value="">Select Classification</option>
+            <% classifications.forEach(classification => { %>
+            <option value="<%= classification._id %>"><%= classification.name %></option>
+            <% }) %>
+          </select>
+
+          <button type="submit" class="mt-4">Submit</button>
+        </form>
+      </div>
+    </div>

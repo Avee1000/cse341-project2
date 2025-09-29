@@ -1,0 +1,21 @@
+GET http://localhost:8080/users/api/contact/
+
+####
+GET http://localhost:8000/users/api/cars/68d537d38ff59e09a75806e9
+
+
+####
+PUT http://localhost:8080/users/api/userupdate/68bab99d63c64d86776a04a4
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Carter",
+  "email": "JaneDoe@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "2000-01-01"
+}
+
+####
+DELETE  http://localhost:8080/users/api/userdelete/68ce8b7b85d5e6f334db5500
+
