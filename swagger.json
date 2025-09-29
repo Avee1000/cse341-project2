@@ -5,7 +5,7 @@
     "description": "API for managing Cars",
     "version": "1.0.0"
   },
-  "host": "https://cse341-project2-5k0h.onrender.com/",
+  "host": "https://cse341-project2-5k0h.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
