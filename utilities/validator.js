@@ -1,4 +1,3 @@
-
 const {
     body,
     validationResult
@@ -66,5 +65,6 @@ module.exports = validate;
 
 module.exports = {
     createCarValidation,
-    updateCarValidation
+    updateCarValidation,
+    validate
 };
