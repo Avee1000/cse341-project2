@@ -127,6 +127,26 @@ invCont.getAllCars = async (req, res, next) => {
     }
 };
 
+invCont.getAllClassifications = async (req, res, next) => {
+    try {
+        const classifications = await Classification.find({});
+        if (!classifications || classifications.length === 0) {
+            res.status(400).send("No Classifications Found");
+            return next({
+                status: 400,
+                message: "No Classifications Found"
+            });
+        }
+        res.status(201).json(classifications);
+    } catch (error) {
+        console.error("🔥 Error fetching all classifications:", error);
+        next({
+            status: 500,
+            message: "Server Error"
+        });
+    }
+};
+
 // Create a new car
 invCont.createCars = async (req, res, next) => {
     try {
@@ -141,7 +161,7 @@ invCont.createCars = async (req, res, next) => {
             classification
         } = req.body;
 
-        const car = await Cars.create({
+        const newCar = {
             make,
             model,
             year,
@@ -152,8 +172,9 @@ invCont.createCars = async (req, res, next) => {
             miles,
             color,
             classification
-        });
+        }
 
+        const car = await Cars.create(newCar);
         if (!car) {
             res.status(400).send("Cannot Create Car");
             return next({
@@ -172,6 +193,31 @@ invCont.createCars = async (req, res, next) => {
         });
     }
 };
+
+invCont.createClassification = async (req, res, next) => { 
+    try {
+        const {
+            name,
+            description
+        } = req.body;
+        const classification = await Classification.create({ name, description });
+        if (!classification) {
+            res.status(400).send("Cannot Create Classification");
+            return next({
+                status: 500,
+                message: "Server Error"
+            });
+        }
+
+        res.status(201).json(classification);
+    } catch (error) {
+        console.error("🔥 Error creating classification:", error);
+        next({
+            status: 500,
+            message: "Server Error"
+        });
+    }
+}
 
 // Edit car
 invCont.editCars = async (req, res, next) => {
@@ -237,6 +283,47 @@ invCont.editCars = async (req, res, next) => {
     }
 };
 
+invCont.editClassification = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { name, description } = req.body;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).send("Invalid Classification ID");
+            return next({
+                status: 400,
+                message: "Invalid Classification ID"
+            });
+        }
+
+        const result = await Classification.findByIdAndUpdate(
+            id, {
+            $set: {
+                name,
+                description
+            }
+        }, {
+            new: true
+        }
+        );
+
+        if (!result) {
+            res.status(400).send("Cannot edit classification");
+            return next({
+                status: 404,
+                message: "Classification Not Found"
+            });
+        }
+
+        res.status(201).json(result);
+    } catch (error) {
+        console.error("🔥 Error updating classification:", error);
+        next({
+            status: 500,
+            message: "Server Error"
+        });
+    }
+}
 // Delete car
 invCont.deleteCars = async (req, res, next) => {
     try {
@@ -263,6 +350,37 @@ invCont.deleteCars = async (req, res, next) => {
         res.status(200).json(car);
     } catch (error) {
         console.error("🔥 Error deleting car:", error);
+        next({
+            status: 500,
+            message: "Server Error"
+        });
+    }
+};
+
+invCont.deleteClassification = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).send("Invalid Classification ID");
+            return next({
+                status: 400,
+                message: "Invalid Classification ID"
+            });
+        }
+
+        const classification = await Classification.findByIdAndDelete(id);
+        if (!classification) {
+            return next({
+                status: 400,
+                message: "Classification Not Found"
+            });
+        }
+
+        res.status(200).json(classification);
+    }
+    catch (error) {
+        console.error("🔥 Error deleting classification:", error);
         next({
             status: 500,
             message: "Server Error"

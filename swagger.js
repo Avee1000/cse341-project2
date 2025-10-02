@@ -8,7 +8,9 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/cars-route.js'];
+const endpointsFiles = ['./routes/cars-route.js',
+    './routes/class-route.js'
+];
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(async () => {
     await import('./server.js')
