@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const invController = require("../controllers/invController");
+const isAuthenticated = require("../utilities/authenticate");
 
-router.get("/create", invController.buildCreateCars);
+router.get("/create", isAuthenticated, invController.buildCreateCars);
 
-router.get("/edit/:id", invController.buildEditCars);
+router.get("/edit/:id", isAuthenticated, invController.buildEditCars);
 
 // route.get("/:id", contactController.getOneContact);
 

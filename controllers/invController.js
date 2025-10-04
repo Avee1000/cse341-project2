@@ -212,6 +212,8 @@ invCont.createClassification = async (req, res, next) => {
         res.status(201).json(classification);
     } catch (error) {
         console.error("🔥 Error creating classification:", error);
+                    res.status(400).send(`${error}`);
+
         next({
             status: 500,
             message: "Server Error"
